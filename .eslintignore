@@ -1,0 +1,6 @@
+node_modules
+dist
+knexfile.ts
+migrations/*
+jest.config.ts
+babelrc.test.js

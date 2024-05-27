@@ -1,0 +1,37 @@
+{
+  "compilerOptions":{
+     "target":"es6",
+     "module":"commonjs",
+     "rootDir":"./",
+     "outDir":"./dist",
+     "esModuleInterop":true,
+     "strict":true,
+     "resolveJsonModule":true,
+     "moduleResolution":"node",
+     "baseUrl":"./",
+     "paths":{
+        "@app":["src/app.ts"],
+        "@logger":["src/utils/logger.ts"],
+        "@core/*":["src/core/*"],
+        "@routes":["src/routes/index.ts"],
+        "@routes/*":["src/routes/*"],
+        "@utils/*":["src/utils/*"],
+        "@middlewares/*":["src/middlewares/*"],
+        "@appTypes/*":["src/types/*"],
+        "@repositories/*":["src/repositories/*"],
+        "@tests/*":["tests/*"],
+     }
+  },
+  "typeRoots":[
+     "./src/types"
+  ],
+  "include":[
+     "src/**/*",
+     "tests/**/*",
+     "tests/.setup/*"
+  ],
+  "exclude":[
+     "node_modules",
+     "dist"
+  ]
+}
