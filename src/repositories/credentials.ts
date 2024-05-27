@@ -2,4 +2,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const getSchoolTokenById = async (
   schoolId: string,
-) => 'EXAMPLE_API_KEY';
+) => null;

@@ -60,7 +60,7 @@ Nothing will happen until the application receives a POST call on an `install`, 
 - Once the application is created on the platform and local-tunnel or ngrok is running, you need to [create your first action](https://developers.edusign.com/docs/glossary#app-actions).
   - In `Platform`, choose **Administration**.
   - In `Location`, choose **Dashboard**.
-  - In URL, enter the URL provided by local-tunnel or ngrok, for example, `https://my-new-app.loca.lt` (do not specify the port).
+  - In URL, enter the URL provided by local-tunnel or ngrok with the api version, for example, `https://my-new-app.loca.lt/v1` (do not specify the port).
 - Now it's time to test, go to your Edusign platform dashboard and you should see your new app working. Be sure to check the logs of your boilerplate.
 
 ## Project Structure
