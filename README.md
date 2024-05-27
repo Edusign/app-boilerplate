@@ -42,6 +42,25 @@ npm start
 ```
 
 Votre application sera alors accessible à l'adresse [http://localhost:3000](http://localhost:3000).
+Il ne se passera rien tant que l'application ne recevra pas d'appel POST sur une route `install`, `uninstall`, ou `home`
+
+- Pour tester, il va falloir créer [votre première application sur la plateforme edusign](https://developers.edusign.com/docs/building-an-app#creating-your-first-app)
+- Il va vous falloir une URL en HTTPS pour pouvoir tester le serveur. Pour ça vous pouvez par exemple utiliser la librairie [local-tunnel](https://theboroer.github.io/localtunnel-www/) ou [ngrock](https://ngrok.com/docs/getting-started/)
+  - Dans le cas de local-tunnel, il suffit dans un premier temps d'installer la librairie : 
+  ```sh
+  npm install -g localtunnel
+  ```
+  - Puis de lancer l'écoute du serveur avec la commande : 
+  ```sh
+  lt --port 3000 --subdomain my-new-app
+  ```
+  N'hésitez pas à personnaliser le subdomain pour l'adapter à vos besoins.
+  
+- Une fois l'application créée sur la platforme et local-tunnel ou ngrock de lancé, il va falloir [créer votre première action](https://developers.edusign.com/docs/glossary#app-actions)
+  - Dans `Platforme` choisissez **Administration**
+  - Dans `Emplacement` choisissez **Dashboard**
+  - Dans URL, saisissez l'url donnée par local-tunnel ou ngrock, par exemple `https://my-new-app.loca.lt` ( ne précisez pas le port )
+- Il n'y a plus qu'à tester, allez sur le Tableau de bord de votre plaforme Edusign et vous devriez voir votre nouvelle app fonctionelle. N'hésitez pas à checker les logs de votre boilerplate.
 
 ## Structure du projet
 
