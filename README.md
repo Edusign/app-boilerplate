@@ -1,31 +1,32 @@
-# Edusign Express Boilerplate
+![Logo Edusign](https://edusign.com/fr/wp-content/uploads/sites/2/2023/09/new-logo-square-edusign.png)
+# Edusign App Boilerplate
 
-Bienvenue dans le dépôt officiel du boilerplate **Edusign** ! Ce projet a pour but de fournir un point de départ simple et efficace pour la création d'applications destinées à notre marketplace. Il utilise [Express](https://expressjs.com/), un framework web minimaliste pour Node.js.
+Welcome to the official **Edusign** boilerplate repository! This project aims to provide a simple and efficient starting point for creating applications intended for our marketplace. It uses [Express](https://expressjs.com/), a minimalistic web framework for Node.js.
 
-## Table des matières
+## Table of Contents
 
-- [À propos](#à-propos)
-- [Prérequis](#prérequis)
+- [About](#about)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Démarrage](#démarrage)
-- [Structure du projet](#structure-du-projet)
-- [Contribuer](#contribuer)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
 - [Support](#support)
 
-## À propos
+## About
 
-Le **Edusign Express Boilerplate** est conçu pour être un dépôt "plug&play" permettant aux développeurs de démarrer rapidement le développement d'applications intégrées à la marketplace d'Edusign. Il inclut les configurations de base et les structures de fichiers essentielles pour débuter.
+The **Edusign Express Boilerplate** is designed to be a "plug & play" repository allowing developers to quickly start developing applications integrated into the Edusign marketplace. It includes basic configurations and essential file structures to get started.
 
-## Prérequis
+## Prerequisites
 
-Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
+Before starting, ensure you have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/) (version 18 ou supérieure)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ## Installation
 
-Clonez le dépôt et installez les dépendances nécessaires :
+Clone the repository and install the necessary dependencies:
 
 ```bash
 git clone https://github.com/Edusign/app-boilerplate
@@ -33,41 +34,41 @@ cd app-boilerplate
 npm install
 ```
 
-## Démarrage
+## Getting Started
 
-Pour lancer le serveur de développement, utilisez la commande suivante :
+To start the development server, use the following command:
 
 ```bash
 npm start
 ```
 
-Votre application sera alors accessible à l'adresse [http://localhost:3000](http://localhost:3000).
-Il ne se passera rien tant que l'application ne recevra pas d'appel POST sur une route `install`, `uninstall`, ou `home`
+Your application will then be accessible at [http://localhost:3000](http://localhost:3000).
+Nothing will happen until the application receives a POST call on an `install`, `uninstall`, or `home` route.
 
-- Pour tester, il va falloir créer [votre première application sur la plateforme edusign](https://developers.edusign.com/docs/building-an-app#creating-your-first-app)
-- Il va vous falloir une URL en HTTPS pour pouvoir tester le serveur. Pour ça vous pouvez par exemple utiliser la librairie [local-tunnel](https://theboroer.github.io/localtunnel-www/) ou [ngrock](https://ngrok.com/docs/getting-started/)
-  - Dans le cas de local-tunnel, il suffit dans un premier temps d'installer la librairie : 
+- To test, you need to create [your first application on the Edusign platform](https://developers.edusign.com/docs/building-an-app#creating-your-first-app).
+- You will need an HTTPS URL to test the server. For this, you can use the [local-tunnel](https://theboroer.github.io/localtunnel-www/) library or [ngrok](https://ngrok.com/docs/getting-started/).
+  - For local-tunnel, first install the library:
   ```sh
   npm install -g localtunnel
   ```
-  - Puis de lancer l'écoute du serveur avec la commande : 
+  - Then start the server listener with the command:
   ```sh
   lt --port 3000 --subdomain my-new-app
   ```
-  N'hésitez pas à personnaliser le subdomain pour l'adapter à vos besoins.
+  Feel free to customize the subdomain to suit your needs.
   
-- Une fois l'application créée sur la platforme et local-tunnel ou ngrock de lancé, il va falloir [créer votre première action](https://developers.edusign.com/docs/glossary#app-actions)
-  - Dans `Platforme` choisissez **Administration**
-  - Dans `Emplacement` choisissez **Dashboard**
-  - Dans URL, saisissez l'url donnée par local-tunnel ou ngrock, par exemple `https://my-new-app.loca.lt` ( ne précisez pas le port )
-- Il n'y a plus qu'à tester, allez sur le Tableau de bord de votre plaforme Edusign et vous devriez voir votre nouvelle app fonctionelle. N'hésitez pas à checker les logs de votre boilerplate.
+- Once the application is created on the platform and local-tunnel or ngrok is running, you need to [create your first action](https://developers.edusign.com/docs/glossary#app-actions).
+  - In `Platform`, choose **Administration**.
+  - In `Location`, choose **Dashboard**.
+  - In URL, enter the URL provided by local-tunnel or ngrok, for example, `https://my-new-app.loca.lt` (do not specify the port).
+- Now it's time to test, go to your Edusign platform dashboard and you should see your new app working. Be sure to check the logs of your boilerplate.
 
-## Structure du projet
+## Project Structure
 
-Voici un aperçu de la structure des fichiers du projet :
+Here is an overview of the project's file structure:
 
 ```
-edusign-express-boilerplate/
+app-boilerplate/
 ├── dist/
 ├── tests/
 ├── src/
@@ -75,9 +76,9 @@ edusign-express-boilerplate/
 │   ├── middlewares/
 │   ├── routes/
 │   │   └── v1/   
-│   │       ├─ home.ts
-│   │       ├─ index.ts
-│   │       ├─ install.ts
+│   │       ├── home.ts
+│   │       ├── index.ts
+│   │       ├── install.ts
 │   │       └── uninstall.ts
 │   ├── types/
 │   ├── utils/
@@ -88,30 +89,30 @@ edusign-express-boilerplate/
 └── README.md
 ```
 
-- **dist/** : Contient les fichiers statiques transpilés.
-- **test/** : Permet de définir une suite de tests pour l'application
-- **src/** : Contient le code source de l'application.
-  - **middlewares/** : Contient les middlewares Express.
-  - **core/** : Contient la logique technique d'une action, qui peut être utilisée sur plusieurs routes.
-  - **routes/** : Définit les endpoints de l'API.
-  - **types/** : Contient les différents types de l'application
-  - **utils/** : Contient des fonctions utils pour l'application
-  - **app.js** : Initialise les middlewares et les routes.
-  - **index.js** : Démarre le serveur.
-- **.gitignore** : Liste des fichiers et dossiers à ignorer par Git.
-- **package.json** : Fichier de configuration npm.
-- **README.md** : Documentation du projet.
+- **dist/**: Contains the transpiled static files.
+- **test/**: Allows defining a suite of tests for the application.
+- **src/**: Contains the application's source code.
+  - **middlewares/**: Contains Express middlewares.
+  - **core/**: Contains the technical logic of an action, which can be used across multiple routes.
+  - **routes/**: Defines the API endpoints.
+  - **types/**: Contains the different types used in the application.
+  - **utils/**: Contains utility functions for the application.
+  - **app.js**: Initializes the middlewares and routes.
+  - **index.js**: Starts the server.
+- **.gitignore**: List of files and directories to be ignored by Git.
+- **package.json**: npm configuration file.
+- **README.md**: Project documentation.
 
-## Contribuer
+## Contributing
 
-Les contributions sont les bienvenues ! Pour contribuer, veuillez suivre ces étapes :
+Contributions are welcome! To contribute, please follow these steps:
 
-1. Fork le dépôt
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/ma-nouvelle-fonctionnalité`)
-3. Committez vos modifications (`git commit -m 'Ajout d'une nouvelle fonctionnalité'`)
-4. Poussez votre branche (`git push origin feature/ma-nouvelle-fonctionnalité`)
-5. Ouvrez une Pull Request
+1. Fork the repository.
+2. Create a branch for your feature (`git checkout -b feature/my-new-feature`).
+3. Commit your changes (`git commit -m 'Add a new feature'`).
+4. Push your branch (`git push origin feature/my-new-feature`).
+5. Open a Pull Request.
 
 ## Support
 
-Si vous avez des questions ou avez besoin d'aide, n'hésitez pas à ouvrir une issue dans ce dépôt.
+If you have any questions or need help, feel free to open an issue in this repository.
