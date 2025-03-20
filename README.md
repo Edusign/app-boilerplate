@@ -36,7 +36,7 @@ npm install
 
 ## Getting Started
 
-To start the development server, use the following command:
+To start the local server, use the following command:
 
 ```bash
 npm start

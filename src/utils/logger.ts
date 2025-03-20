@@ -15,6 +15,8 @@ const logLevels = {
     debug: 'rainbow',
     info: 'cyan',
     notice: 'white',
+    http: 'bold magenta',
+    sql: 'bold blue',
     warning: 'yellow',
     error: 'bold red',
     crit: 'inverse yellow',

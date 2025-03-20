@@ -12,5 +12,5 @@ export default async function homeRoute(req: Request, res: Response) {
   blocksApi.Title('title', 'Example App');
   blocksApi.Text('description', 'Intégration de ma nouvelle app avec Edusign.');
 
-  return res.send(blocksApi.toJson());
+  res.send(blocksApi.toJson());
 }

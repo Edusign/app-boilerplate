@@ -1,19 +1,17 @@
 import Edusign from '@_edusign/api';
-import * as credentialsRepository from '@repositories/credentials';
+import { Environment } from '@appTypes/environment/envs';
 
 /**
  * Function to get the credentials
  * @param schoolId | string
  * @returns edusignAPI | Edusign.Edusign
  */
-export default async function getApiInstance(schoolId: string) {
-  const edusignApiMode: 'production' | 'sandbox' = process.env.NODE_ENV === 'production' ? 'production' : 'sandbox';
+export default async function getApiInstance(apiKey: string) {
+  const edusignApiMode = process.env.NODE_ENV === Environment.PRODUCTION ? 'production' : 'sandbox';
 
   //* Here you can fetch the credentials from the database and return the API instance for example
-  const apiKey = await credentialsRepository.getSchoolTokenById(schoolId);
   if (!apiKey) {
-    throw new Error('No credentials found');
+    throw new Error('No school API token found');
   }
-  const edusignAPI = new Edusign.Edusign(apiKey, edusignApiMode);
-  return edusignAPI;
+  return new Edusign.Edusign(apiKey, edusignApiMode);
 }

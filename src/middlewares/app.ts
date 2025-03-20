@@ -8,9 +8,16 @@ export default async function appMiddleware(req: Request, res: Response, next: N
   try {
     // Getting school and app id from the headers
     req.schoolId = req.body.schoolId || req.headers?.['x-edusign-school-id']?.toString();
+
+    if (!req.schoolId) {
+      throw new Error('School id is missing');
+    }
+
     req.appId = req.headers?.['x-edusign-app-id']?.toString();
     req.lang = req.headers?.['x-edusign-lang']?.toString() || 'en';
+    req.hmac = req.headers?.['x-edusign-hmac']?.toString();
     req.userId = req.body?.caller?.userId;
+    req.location = req.body?.LOCATION;
 
     req.studentId = req.body?.context?.studentId;
     req.teacherId = req.body?.context?.teacherId;
@@ -19,18 +26,10 @@ export default async function appMiddleware(req: Request, res: Response, next: N
 
     req.clientId = req.body?.client_id;
     req.clientSecret = req.body?.client_secret;
-    req.token = req.body?.token;
+    req.apiKey = req.body?.token;
 
-    let appParameters: Record<Partial<keyof AppParameters>, AppParameter> | null = null;
-    try {
-      if (req.headers?.['x-edusign-school-id'] && req.headers?.['x-edusign-app-id'] && !['/install'].includes(req.path)) {
-        // Fetching appParameters from the API
-        appParameters = await getAppParameters(req.headers?.['x-edusign-app-id'].toString(), req.headers?.['x-edusign-school-id'].toString());
-      }
-    } catch (error) {
-      logger.error('Error while getting the app parameters on Edusign API, had you installed application ?', error);
-    }
-    req.appParameters = appParameters;
+    req.appParameters = null;
+    
     return next();
   } catch (error) {
     return next(error);

@@ -1,5 +1,6 @@
-import { AppManagementRequest } from '@appTypes/express';
+import { AppManagementBody } from '@appTypes/express';
 import logger from '@logger';
+import * as credentialsRepository from '@repositories/credentials';
 import { NextFunction, Request, Response } from 'express';
 
 /**
@@ -8,20 +9,35 @@ import { NextFunction, Request, Response } from 'express';
  */
 export default async function installAppRoute(req: Request, res: Response, next: NextFunction) {
   try {
-    const {
-      appId, schoolId, clientId, clientSecret,
-    } = (req as AppManagementRequest);
+    const { 
+      token: apiKey, 
+      schoolId,
+      client_secret: clientSecret, 
+      client_id: clientId
+     } = req.body as AppManagementBody;
+    if (!schoolId || !clientId) {
+      throw new Error('schoolId and clientId are required');
+    }
+
+    if (!apiKey || !clientSecret) {
+      throw new Error('apiKey and clientSecret are required');
+    }
 
     logger.info('Installing app with params', {
-      appId,
+      apiKey,
       schoolId,
       clientId,
       clientSecret,
     });
 
-    // ... Any logic to install the app
+    await credentialsRepository.insertOrUpdateSchool(
+      schoolId,
+      apiKey,
+      clientId,
+      clientSecret,
+    );
 
-    return res.json({
+    res.json({
       success: true,
       message: 'App successfully installed',
     });

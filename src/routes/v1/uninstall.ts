@@ -1,6 +1,7 @@
-import { AppManagementRequest } from '@appTypes/express';
-import logger from '@logger';
 import { NextFunction, Request, Response } from 'express';
+
+import logger from '@logger';
+import * as credentialsRepository from '@repositories/credentials';
 
 /**
  * Route to uninstall app
@@ -8,20 +9,17 @@ import { NextFunction, Request, Response } from 'express';
  */
 export default async function uninstallAppRoute(req: Request, res: Response, next: NextFunction) {
   try {
-    const {
-      appId, schoolId, clientId, clientSecret,
-    } = (req as AppManagementRequest);
+    const { schoolId } = req;
 
-    logger.info('Uninstalling app with params', {
-      appId,
-      schoolId,
-      clientId,
-      clientSecret,
-    });
+    logger.info('Uninstalling app from school ' + schoolId);
 
-    // ... Any logic to uninstall the app
+    const nbSchoolRemoved = await credentialsRepository.removeSchool(schoolId!);
 
-    return res.json({
+    if (nbSchoolRemoved === 0) {
+      throw new Error('No school found');
+    }
+
+    res.json({
       success: true,
       message: 'App successfully uninstalled',
     });

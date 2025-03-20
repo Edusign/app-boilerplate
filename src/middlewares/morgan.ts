@@ -1,5 +1,6 @@
 import morgan from 'morgan';
 import logger from '@logger';
+import { Environment } from '@appTypes/environment/envs';
 
 const stream = {
   // Use the http severity
@@ -7,8 +8,8 @@ const stream = {
 };
 
 const skip = () => {
-  const env = process.env.NODE_ENV || 'development';
-  return env !== 'development';
+  const env = process.env.NODE_ENV || Environment.LOCAL;
+  return env === Environment.PRODUCTION;
 };
 
 const morganMiddleware = morgan(

@@ -2,14 +2,13 @@ import _ from 'lodash';
 
 /* eslint-disable import/prefer-default-export */
 import { AppParameters, AppParameter } from '@appTypes/parameters';
-import getApiInstance from '@utils/getApiInstance';
+import { EdusignApiType } from '@appTypes/express';
 
-export const getAppParameters = async (appId: string, schoolId: string): Promise<Record<keyof AppParameters, AppParameter>> => {
-  const apiInstance = await getApiInstance(schoolId);
+export const getAppParameters = async (apiInstance: EdusignApiType, appId: string, schoolId: string): Promise<Record<keyof AppParameters, AppParameter>> => {
   // Fetching appParameters from the API
-  return apiInstance.apps().getParameters(appId)
+  return apiInstance.apps().getParameters()
     // Converting the array of parameters to an object with the parameter name as the key
-    .then(({ result }: { result: Record<string, any>[] }) => result.reduce((parameters, parameter) => ({
+    .then(({ result }: { result: Record<string, any> }) => Object.values(result).reduce((parameters, parameter: any) => ({
       ...parameters,
       [parameter.NAME]: _.omit(parameter, ['NAME']),
     }), {} as Record<keyof AppParameters, AppParameter>))

@@ -1,14 +1,12 @@
+import "source-map-support/register";
 import logger from '@logger';
 import app from './app';
+import { initializeDatabase } from "@db";
+import { Server } from "http";
 
 const port = 3000;
 
-// Start the server
-const server = app.listen(port, () => {
-  logger.info(`Server started : http://localhost:${port}`);
-});
-
-const exitHandler = () => {
+const exitHandler = (server: Server) => {
   if (server) {
     server.close(() => {
       logger.info('Server closed');
@@ -19,17 +17,32 @@ const exitHandler = () => {
   }
 };
 
-const unexpectedErrorHandler = (error: any) => {
+const unexpectedErrorHandler = (server: Server) => (error: any) => {
   logger.error(error);
-  exitHandler();
+  exitHandler(server);
 };
 
-process.on('uncaughtException', unexpectedErrorHandler);
-process.on('unhandledRejection', unexpectedErrorHandler);
-
-process.on('SIGTERM', () => {
+const SIGTERMHandler = (server: Server) => () => {
   logger.info('SIGTERM received');
-  if (server) {
-    server.close();
-  }
-});
+  exitHandler(server);
+};
+
+const unhandledRejectionHandler = (error: any) => {
+  logger.error(error);
+};
+
+const startServer = async () => {
+  await initializeDatabase();
+  // Start the server
+  const server = app.listen(port, () => {
+    logger.info(`Server started : http://localhost:${port}`);
+  });
+
+  process.on('uncaughtException', unexpectedErrorHandler(server));
+  process.on('unhandledRejection', unhandledRejectionHandler);
+  process.on('SIGTERM', SIGTERMHandler(server));
+
+  return server;
+};
+
+startServer();

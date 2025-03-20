@@ -6,8 +6,8 @@ import logger from '@logger';
 
 import morganMiddleware from '@middlewares/morgan';
 import appMiddleware from '@middlewares/app';
-
 import { v1 } from '@routes';
+import { Environment } from '@appTypes/environment/envs';
 
 const app = express();
 
@@ -29,14 +29,17 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Generic error handler
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  logger.error('An error has occured : ', err);
+  logger.error('An error has occured : ', {
+    name: err.name,
+    error: err.message,
+    stack: err.stack?.split('\n').map(stack => stack.trim()).slice(1),
+  });
   const Blocks = new Edusign.Blocks();
 
   Blocks.Title('error_title', 'An error has occured');
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === Environment.PRODUCTION) {
     Blocks.Error('error_message', err?.message || 'Cannot retrieve message');
   } else {
     Blocks.Error('error_message', err?.message || 'Cannot retrieve message');
@@ -50,7 +53,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     }]);
   }
 
-  return res.send(Blocks.toJson());
+  // Sending 200 status code to avoid blocking the request
+  // but the error will be displayed in the response for displaying error detail information
+  res.send(Blocks.toJson());
 });
 
 export default app;
