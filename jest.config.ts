@@ -28,7 +28,7 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' + compilerOptions.baseUrl.replace('./', '') }),
     "^axios$": require.resolve("axios"),
-  },
+  }
 };
 
 

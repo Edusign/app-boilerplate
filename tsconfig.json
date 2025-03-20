@@ -24,7 +24,7 @@
         "@appTypes/*":["src/types/*"],
         "@repositories/*":["src/repositories/*"],
         "@knexConfig":["knexfile.ts"],
-        "@tests/*":["tests/*"],
+        "@tests/*":["tests/*"]
      }
   },
   "typeRoots":[
@@ -41,6 +41,6 @@
   ],
   "exclude":[
      "node_modules",
-     "dist",
+     "dist"
   ]
 }

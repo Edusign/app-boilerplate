@@ -1,3 +1,4 @@
+import { Environment } from '@appTypes/environment/envs';
 //Forcing NODE_ENV to test for override the default value
 process.env.NODE_ENV = Environment.TEST;
 
@@ -7,7 +8,6 @@ import logger from '@logger';
 
 // Importation of librairies mocks
 import '@tests/mocks/librairies/edusignApi.mock';
-import { Environment } from '@appTypes/environment/envs';
 expect.extend(matchers);
 
 beforeAll(async () => {
