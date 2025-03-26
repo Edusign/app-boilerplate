@@ -27,6 +27,23 @@ const logLevels = {
 
 winston.addColors(logLevels.colors);
 
+/**
+ * Creates a Winston logger instance with custom configuration.
+ *
+ * The logger is configured with the following features:
+ * - Log levels and colors are defined by `logLevels.levels`.
+ * - Log messages are formatted to include a timestamp, log level, and message.
+ * - Errors are formatted to include their stack trace, with the error name highlighted in red.
+ * - Additional metadata is serialized into a JSON string if present.
+ * - Logs are output to the console with the specified `logLevel`.
+ *
+ * @constant
+ * @type {winston.Logger}
+ *
+ * @example
+ * logger.info('This is an info message');
+ * logger.error(new Error('This is an error message'));
+ */
 const logger = winston.createLogger({
   level: logLevel,
   levels: logLevels.levels,

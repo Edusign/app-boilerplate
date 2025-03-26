@@ -4,8 +4,15 @@ import logger from '@logger';
 import * as credentialsRepository from '@repositories/credentials';
 
 /**
- * Route to uninstall app
- * @param body | object
+ * Uninstalls the app for a specific school based on the provided school ID.
+ *
+ * @param req - The HTTP request object, which contains the `schoolId` parameter.
+ * @param res - The HTTP response object used to send the response back to the client.
+ * @param next - The next middleware function in the Express.js request-response cycle.
+ *
+ * @throws Will throw an error if no school is found with the provided `schoolId`.
+ *
+ * @returns A JSON response indicating the success of the uninstallation process.
  */
 export default async function uninstallAppRoute(req: Request, res: Response, next: NextFunction) {
   try {

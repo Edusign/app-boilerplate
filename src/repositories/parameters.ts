@@ -4,6 +4,15 @@ import _ from 'lodash';
 import { AppParameters, AppParameter } from '@appTypes/parameters';
 import { EdusignApiType } from '@appTypes/express';
 
+/**
+ * Fetches application parameters from the Edusign API for a specific application and school.
+ *
+ * @param apiInstance - An instance of the Edusign API client.
+ * @param appId - The ID of the application for which parameters are being fetched.
+ * @param schoolId - The ID of the school associated with the application.
+ * @returns A promise that resolves to an object where the keys are parameter names and the values are the corresponding app parameters.
+ * @throws An error if the API call fails, including the error message from the API response if available.
+ */
 export const getAppParameters = async (apiInstance: EdusignApiType, appId: string, schoolId: string): Promise<Record<keyof AppParameters, AppParameter>> => {
   // Fetching appParameters from the API
   return apiInstance.apps().getParameters()

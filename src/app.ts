@@ -39,6 +39,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     error: err.message,
     stack: err.stack?.split('\n').map(stack => stack.trim()).slice(1),
   });
+  
+  /**
+   * An instance of the `Edusign.Blocks` class.
+   * 
+   * This object is used to manage and interact with blocks within the application.
+   * Ensure that the `Edusign` library is properly imported and initialized before
+   * using this instance.
+   */
   const Blocks = new Edusign.Blocks();
 
   Blocks.Title('error_title', 'An error has occured');
