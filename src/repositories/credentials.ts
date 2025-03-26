@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
+import app from "@app";
 import { AppCredential, AppCredentialColumns, TableNames } from "@appTypes/databases";
 import db from "@db";
 
@@ -10,6 +11,18 @@ export const getSchoolCredentials = async (
     [AppCredentialColumns.SCHOOL_ID]: schoolId,
   })
   .first()
+)
+
+export const getSchoolClientSecret = async (
+  schoolId: string,
+) => (
+  db<AppCredential>(TableNames.APP_CREDENTIALS)
+  .select(AppCredentialColumns.CLIENT_SECRET)
+  .where({
+    [AppCredentialColumns.SCHOOL_ID]: schoolId,
+  })
+  .first()
+  .then((result) => result?.[AppCredentialColumns.CLIENT_SECRET] ?? null)
 )
 
 

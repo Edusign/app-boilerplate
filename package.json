@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@_edusign/api": "^1.10.1",
+    "@_edusign/api": "^1.11.0",
     "better-sqlite3": "^11.9.1",
     "body-parser": "^1.20.3",
     "express": "^4.21.2",

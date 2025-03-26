@@ -30,6 +30,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Generic error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (typeof err === 'string') {
+    err = new Error(err);
+  }
+
   logger.error('An error has occured : ', {
     name: err.name,
     error: err.message,
