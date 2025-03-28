@@ -13,6 +13,8 @@ import { Request, Response } from 'express';
  * @param res - The HTTP response object.
  *
  * @returns A JSON response containing the title and description of the app.
+ * 
+ * @see https://developers.edusign.com/docs/action-documentation
  */
 export default async function homeRoute(req: Request, res: Response) {
   const blocksApi = new Edusign.Blocks();

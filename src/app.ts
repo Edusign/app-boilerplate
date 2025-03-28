@@ -6,8 +6,9 @@ import logger from '@logger';
 
 import morganMiddleware from '@middlewares/morgan';
 import appMiddleware from '@middlewares/app';
-import { v1 } from '@routes';
+import { v1, webhook } from '@routes';
 import { Environment } from '@appTypes/environment/envs';
+import { WebhookError } from '@utils/errors';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(appMiddleware);
 
 // Add routes
 app.use('/v1', v1);
+app.use('/webhook', webhook);
 
 // Generic 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -39,7 +41,25 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     error: err.message,
     stack: err.stack?.split('\n').map(stack => stack.trim()).slice(1),
   });
-  
+
+  if (err instanceof WebhookError) {
+    const webhookErrorResponse: {
+      status: string;
+      message: string;
+      stack?: string[];
+      name?: string
+    } = {
+      status: 'error',
+      message: err.message,
+    };
+    if (process.env.NODE_ENV !== Environment.PRODUCTION) {
+      webhookErrorResponse.name = err.name;
+      webhookErrorResponse.stack = err.stack?.split('\n').map(stack => stack.trim()).slice(1);
+    }
+    res.status(err.code).json(webhookErrorResponse);
+    return;
+  }
+
   /**
    * An instance of the `Edusign.Blocks` class.
    * 

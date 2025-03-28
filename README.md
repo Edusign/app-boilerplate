@@ -75,11 +75,14 @@ app-boilerplate/
 │   ├── core/
 │   ├── middlewares/
 │   ├── routes/
-│   │   └── v1/   
-│   │       ├── home.ts
+│   │   ├── v1/   
+│   │   │   ├── home.ts
+│   │   │   ├── index.ts
+│   │   │   ├── install.ts
+│   │   │   └── uninstall.ts
+│   │   └── webhook/   
 │   │       ├── index.ts
-│   │       ├── install.ts
-│   │       └── uninstall.ts
+│   │       └── onCourseEdited.ts
 │   ├── types/
 │   ├── utils/
 │   ├── app.js
@@ -94,7 +97,7 @@ app-boilerplate/
 - **src/**: Contains the application's source code.
   - **middlewares/**: Contains Express middlewares.
   - **core/**: Contains the technical logic of an action, which can be used across multiple routes.
-  - **routes/**: Defines the API endpoints.
+  - **routes/**: Defines the API and Webhooks endpoints.
   - **types/**: Contains the different types used in the application.
   - **utils/**: Contains utility functions for the application.
   - **app.js**: Initializes the middlewares and routes.

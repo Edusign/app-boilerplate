@@ -18,6 +18,7 @@ type BasicApp = {
   clientId?: string,
   clientSecret?: string,
   apiKey?: string,
+  webhookType?: string | null,
   EdusignApi?: EdusignApiType,
   location?: string,
 }
